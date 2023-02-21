@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public void PlayGame()
+    
+    public void StartGame()
     {
-        // move from the current Scene to the next Scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    
     public void QuitGame()
     {
         Debug.Log("QUIT");
         Application.Quit();
     }
 
-    public void BackToMainMenu()
+    public void Menu()
     {
         // Load Menu Scene
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene("Menu");
     }
-
 }

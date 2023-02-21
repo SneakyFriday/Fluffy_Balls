@@ -7,13 +7,12 @@ public class Ankor : MonoBehaviour
 {
     public float releaseTime = .15f;
     public float maxDragDistance = 2f;
-
     public GameObject nextBall;
-
     public Rigidbody2D rb;
     public Rigidbody2D hook;
+    [SerializeField] private PlayerManager playerManager;
 
-    private bool isPressed = false;
+    private bool isPressed;
 
     void Update()
     {
@@ -46,13 +45,14 @@ public class Ankor : MonoBehaviour
         yield return new WaitForSeconds(releaseTime);
 
         GetComponent<SpringJoint2D>().enabled = false;
-        this.enabled = false;
+        enabled = false;
 
         yield return new WaitForSeconds(2f);
 
         if(nextBall != null)
         {
             nextBall.SetActive(true);
+            playerManager.TakeDamage();
         }
         else
         {
