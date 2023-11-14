@@ -11,8 +11,14 @@ public class Ankor : MonoBehaviour
     public Rigidbody2D rb;
     public Rigidbody2D hook;
     [SerializeField] private PlayerManager playerManager;
-
+    
+    private DrawLine _drawLine;
     private bool isPressed;
+    
+    void Start()
+    {
+        _drawLine = FindObjectOfType<DrawLine>(); 
+    }
 
     void Update()
     {
@@ -29,6 +35,7 @@ public class Ankor : MonoBehaviour
     void OnMouseDown()
     {
         isPressed = true;
+        _drawLine.IsAiming = true;
         rb.isKinematic = true;
     }
     void OnMouseUp()
@@ -36,7 +43,7 @@ public class Ankor : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         SoundManager.PlaySound("playerThrow");
-
+        _drawLine.IsAiming = false;
         StartCoroutine(Release());
     }
 
@@ -51,6 +58,7 @@ public class Ankor : MonoBehaviour
 
         if(nextBall != null)
         {
+            gameObject.SetActive(false);
             nextBall.SetActive(true);
             playerManager.TakeDamage();
         }
